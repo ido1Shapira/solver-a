@@ -27,29 +27,29 @@ namespace solver {
         const double & getb() const { return b; }
         const double & getc() const { return c; }
 
-        friend RealVariable operator* (RealVariable x, const double n);
-        friend RealVariable operator* (const double n , RealVariable x);
-        friend RealVariable operator* (RealVariable left, RealVariable right);
+        friend RealVariable operator* (const RealVariable x, const double n);
+        friend RealVariable operator* (const double n ,const RealVariable x);
+        friend RealVariable operator* (const RealVariable left,const RealVariable right);
 
-        friend RealVariable operator+ (RealVariable x, const double n);
-        friend RealVariable operator+ (const double n , RealVariable x);
-        friend RealVariable operator+ (RealVariable left, RealVariable right);
+        friend RealVariable operator+ (const RealVariable x, const double n);
+        friend RealVariable operator+ (const double n ,const RealVariable x);
+        friend RealVariable operator+ (const RealVariable left,const RealVariable right);
 
-        friend RealVariable operator- (RealVariable x, const double n);
-        friend RealVariable operator- (const double n , RealVariable x);
-        friend RealVariable operator- (RealVariable left, RealVariable right);
+        friend RealVariable operator- (const RealVariable x, const double n);
+        friend RealVariable operator- (const double n ,const RealVariable x);
+        friend RealVariable operator- (const RealVariable left,const RealVariable right);
 
-        friend RealVariable operator^ (RealVariable x, const double n);
+        friend RealVariable operator^ (const RealVariable x, const double n);
 
-        friend RealVariable operator/ (RealVariable x, const double n);
+        friend RealVariable operator/ (const RealVariable x, const double n);
 
-        friend RealVariable operator== (RealVariable left, RealVariable right);
-        friend RealVariable operator== (const double n, RealVariable right);
-        friend RealVariable operator== (RealVariable left, const double n);
+        friend RealVariable operator== (const RealVariable left,const RealVariable right);
+        friend RealVariable operator== (const double n,const RealVariable right);
+        friend RealVariable operator== (const RealVariable left, const double n);
 
-        friend bool operator! (RealVariable x);
-        friend string operator+ (RealVariable x, const string str);
-        friend string operator+ (const string str , RealVariable x);
+        friend bool operator! (const RealVariable x);
+        friend string operator+ (const RealVariable x, const string str);
+        friend string operator+ (const string str ,const RealVariable x);
     };
 
 
@@ -72,37 +72,37 @@ namespace solver {
         const complex<double> & getb() const { return b; }
         const complex<double> & getc() const { return c; }
 
-        friend ComplexVariable operator* (ComplexVariable x, const complex<double> n);
-        friend ComplexVariable operator* (const complex<double> n , ComplexVariable x);
-        friend ComplexVariable operator* (ComplexVariable left, ComplexVariable right);
+        friend ComplexVariable operator* (const ComplexVariable x, const complex<double> n);
+        friend ComplexVariable operator* (const complex<double> n ,const ComplexVariable x);
+        friend ComplexVariable operator* (const ComplexVariable left,const ComplexVariable right);
 
-        friend ComplexVariable operator+ (ComplexVariable x, const complex<double> n);
-        friend ComplexVariable operator+ (const complex<double> n , ComplexVariable x);
-        friend ComplexVariable operator+ (ComplexVariable left, ComplexVariable right);
+        friend ComplexVariable operator+ (const ComplexVariable x, const complex<double> n);
+        friend ComplexVariable operator+ (const complex<double> n ,const ComplexVariable x);
+        friend ComplexVariable operator+ (const ComplexVariable left,const ComplexVariable right);
 
-        friend ComplexVariable operator- (ComplexVariable x, const complex<double> n);
-        friend ComplexVariable operator- (const complex<double> n , ComplexVariable x);
-        friend ComplexVariable operator- (ComplexVariable left, ComplexVariable right);
+        friend ComplexVariable operator- (const ComplexVariable x, const complex<double> n);
+        friend ComplexVariable operator- (const complex<double> n ,const ComplexVariable x);
+        friend ComplexVariable operator- (const ComplexVariable left,const ComplexVariable right);
 
-        friend ComplexVariable operator^ (ComplexVariable x, const complex<double> n);
+        friend ComplexVariable operator^ (const ComplexVariable x, const complex<double> n);
 
-        friend ComplexVariable operator/ (ComplexVariable x, const complex<double> n);
+        friend ComplexVariable operator/ (const ComplexVariable x, const complex<double> n);
 
-        friend ComplexVariable operator== (ComplexVariable left, ComplexVariable right);
-        friend ComplexVariable operator== (const complex<double> n, ComplexVariable right);
-        friend ComplexVariable operator== (ComplexVariable left, const complex<double> n);
+        friend ComplexVariable operator== (const ComplexVariable left,const ComplexVariable right);
+        friend ComplexVariable operator== (const complex<double> n,const ComplexVariable right);
+        friend ComplexVariable operator== (const ComplexVariable left, const complex<double> n);
 
-        friend bool operator! (ComplexVariable x);
-        friend string operator+ (ComplexVariable x, const string str);
-        friend string operator+ (const string str , ComplexVariable x);
+        friend bool operator! (const ComplexVariable x);
+        friend string operator+ (const ComplexVariable x, const string str);
+        friend string operator+ (const string str ,const ComplexVariable x);
 
     };
 
-    double solve(RealVariable equation);
-    double solve(bool equation);
+    double solve(const RealVariable equation);
+    double solve(const bool equation);
 
-    complex<double> solve(ComplexVariable equation);
+    complex<double> solve(const ComplexVariable equation);
 
-    // string to_string (const complex<double> c);
+    string to_string_complex (const complex<double> c);
 
 }

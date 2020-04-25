@@ -12,19 +12,23 @@
 
 using namespace std;
 using solver::solve, solver::RealVariable, solver::ComplexVariable;
+using solver::to_string_complex;
 
 int main() {
     RealVariable x;
 
     cout << solve(2*x-4 == 10) << endl;  // 7
     cout << solve((x^2) == 16) << endl;   // 4 or -4
-    cout << solve((x^2) == -16) << endl;  // exception: no real solution
+    try{
+        cout << solve((x^2) == -16) << endl;  // exception: no real solution
+    }
+    catch(exception& e) { cout<<e.what()<<endl;}
     cout << solve((x^2) + 2*x + 4.0 == 20 + 6.0*x/2 - x) << endl;   // 4 or -4
     double xvalue = solve(2*x-4.0 == 10.0);   // xvalue == 7
 
     ComplexVariable y;
     std::complex<double> yvalue = solve(2*y-4 == 10);
-    cout << yvalue << endl;  // 7+0i  (can be in any other format)
+    cout << to_string_complex(yvalue) << endl;  // 7+0i  (can be in any other format)
 
     cout << solve((y^2) == 16) << endl;   // 4+0i or -4+0i
     cout << solve((y^2) == -16) << endl;  // 0+4i or 0-4i
