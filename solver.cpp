@@ -7,21 +7,17 @@
 using namespace std;
 namespace solver {
 
-    RealVariable operator* (const RealVariable x, const double n) {
-        if(!x) {
-            return RealVariable(0,n,0);
-        }
+    RealVariable operator* (const RealVariable& x, const double n) {
         return RealVariable(x.a*n, x.b*n, x.c*n);
+    
     }
 
-    RealVariable operator* (const double n , RealVariable x) {
-        if(!x) {
-            return RealVariable(0,n,0);
-        }
+    RealVariable operator* (const double n ,const RealVariable& x) {
         return RealVariable(x.a*n, x.b*n, x.c*n);
+    
     }
 
-    RealVariable operator* (const RealVariable left, const RealVariable right) {
+    RealVariable operator* (const RealVariable& left, const RealVariable& right) {
         if(left.a != 0 && right.a != 0) throw invalid_argument("power is too big");
         if(left.a != 0 && right.b != 0) throw invalid_argument("power is too big");
         if(left.b != 0 && right.a != 0) throw invalid_argument("power is too big");
@@ -32,71 +28,41 @@ namespace solver {
 
     }
 
-    RealVariable operator+ (const RealVariable x, const double n) {
-        if(!x) {
-            return RealVariable(0, 1, n);
-        }
-
+    RealVariable operator+ (const RealVariable& x, const double n) {
         return RealVariable(x.a, x.b , x.c+n);
 
     }
 
-    RealVariable operator+ (const double n ,const RealVariable x) {
-        if(!x) {
-            return RealVariable(0, 1, n);
-        }
-
+    RealVariable operator+ (const double n ,const RealVariable& x) {
         return RealVariable(x.a, x.b , x.c+n);
 
     }
 
-    RealVariable operator+ (const RealVariable left, const RealVariable right) {
-        if(!left && !right) {
-            return RealVariable(0 , 2 , 0);
-        }
-        if(!left) {
-            return RealVariable(right.a , right.b + 1 , right.c);
-        }
-        if(!right) {
-            return RealVariable(left.a , left.b + 1 , left.c);
-        }
+    RealVariable operator+ (const RealVariable& left, const RealVariable& right) {
         return RealVariable(left.a + right.a , left.b + right.b , left.c + right.c);
 
     }
 
-    RealVariable operator- (const RealVariable x, const double n) {
-        if(!x) {
-            return RealVariable(0, 1, n);
-        }
-
+    RealVariable operator- (const RealVariable& x, const double n) {
         return RealVariable(x.a, x.b , x.c-n);
 
     }
 
-    RealVariable operator- (const double n ,const RealVariable x) {
-        if(!x) {
-            return RealVariable(0, -1, n);
-        }
-
+    RealVariable operator- (const double n ,const RealVariable& x) {
         return RealVariable(-x.a, -x.b , -x.c+n);
 
     }
 
-    RealVariable operator- (const RealVariable left, const RealVariable right) {
-        if(!left && !right) {
-            return RealVariable(0 , 0 , 0);
-        }
-        if(!left) {
-            return RealVariable(right.a , right.b - 1 , right.c);
-        }
-        if(!right) {
-            return RealVariable(left.a , left.b - 1 , left.c);
-        }
+    RealVariable operator- (const RealVariable& left, const RealVariable& right) {
         return RealVariable(left.a - right.a , left.b - right.b , left.c - right.c);
 
     }
 
-    RealVariable operator^ (const RealVariable x, const double n) {
+    RealVariable RealVariable::operator- () const {
+        return -1 * *this;
+    }
+
+    RealVariable operator^ (const RealVariable& x, const double n) {
         if(n == 2) {
             return RealVariable(1,0,0);
         }
@@ -110,130 +76,98 @@ namespace solver {
 
     }
 
-    RealVariable operator/ (const RealVariable x, const double n) {
-        if(!x) {
-            return RealVariable(0,1/n,0);
-        }
+    RealVariable operator/ (const RealVariable& x, const double n) {
+        if(n == 0) throw invalid_argument("Division by zero is not valid");
+
         return RealVariable(x.a/n, x.b/n, x.c/n);
 
     }
 
-    RealVariable operator== (const RealVariable left, const RealVariable right) {
+    RealVariable operator== (const RealVariable& left, const RealVariable& right) {
         return left - right;
 
     }
 
-    RealVariable operator== (const double n, const RealVariable right) {
+    RealVariable operator== (const double n, const RealVariable& right) {
         return right - n;
 
     }
     
-    RealVariable operator== (const RealVariable left, const double n) {
+    RealVariable operator== (const RealVariable& left, const double n) {
         return left - n;
 
     }
 
-    bool operator! (const RealVariable x) {
-        return x.a == 0 && x.b == 0 && x.c == 0;
+    bool RealVariable::operator! () const {
+        return this->a == 0 && this->b == 0 && this->c == 0;
     }
 
-    string operator+ (const RealVariable x, const string str) {
+    string operator+ (const RealVariable& x, const string str) {
         return to_string((int)x.a) + "x^2 +" + to_string((int)x.b) + "x +"+ to_string((int)x.c) + str;
     }
     
-    string operator+ (const string str , const RealVariable x) {
+    string operator+ (const string str , const RealVariable& x) {
         return str + to_string((int)x.a) + "x^2 +" + to_string((int)x.b) + "x +"+ to_string((int)x.c);
     }
 
+/////////////////////////////////////////ComplexVariable functions//////////////////////////////////////////////
 
-    ComplexVariable operator* (const ComplexVariable x, const complex<double> n) {
-        if(!x) {
-            return ComplexVariable(0,n,0);
-        }
+
+    ComplexVariable operator* (const ComplexVariable& x, const complex<double> n) {
         return ComplexVariable(x.a*n, x.b*n, x.c*n);
 
     }
 
-    ComplexVariable operator* (const complex<double> n , const ComplexVariable x) {
-        if(!x) {
-            return ComplexVariable(0,n,0);
-        }
+    ComplexVariable operator* (const complex<double> n , const ComplexVariable& x) {
         return ComplexVariable(x.a*n, x.b*n, x.c*n);
 
     }
 
-    ComplexVariable operator* (const ComplexVariable left, const ComplexVariable right) {
-        return left;
-        
-        
-        
-        //to do 
+    ComplexVariable operator* (const ComplexVariable& left, const ComplexVariable& right) {
+        if(left.a != complex(0.0,0.0) && right.a != complex(0.0,0.0)) throw invalid_argument("power is too big");
+        if(left.a != complex(0.0,0.0) && right.b != complex(0.0,0.0)) throw invalid_argument("power is too big");
+        if(left.b != complex(0.0,0.0) && right.a != complex(0.0,0.0)) throw invalid_argument("power is too big");
+
+        return ComplexVariable(left.a * right.c + right.a * left.c + left.b * right.b ,
+                                 left.b * right.c + right.b * left.c,
+                                     left.c * right.c);
+
     }   
 
-    ComplexVariable operator+ (const ComplexVariable x, const complex<double> n) {
-        if(!x) {
-            return ComplexVariable(complex(0.0,0.0),complex(1.0,0.0), n);
-        }
-
+    ComplexVariable operator+ (const ComplexVariable& x, const complex<double> n) {
         return ComplexVariable(x.a, x.b , x.c+n);
-
 
     }
     
-    ComplexVariable operator+ (const complex<double> n , const ComplexVariable x) {
-        if(!x) {
-            return ComplexVariable(complex(0.0,0.0),complex(1.0,0.0), n);
-        }
-
+    ComplexVariable operator+ (const complex<double> n , const ComplexVariable& x) {
         return ComplexVariable(x.a, x.b , x.c+n);
     }
 
-    ComplexVariable operator+ (const ComplexVariable left, const ComplexVariable right) {
-        if((!left) && (!right)) {
-            return ComplexVariable(complex(0.0,0.0) , complex(2.0,0.0) , complex(0.0,0.0));
-        }
-        if(!left) {
-            return ComplexVariable(right.a , right.b + complex(1.0,0.0) , right.c);
-        }
-        if(!right) {
-            return ComplexVariable(left.a , left.b + complex(1.0,0.0) , left.c);
-        }
+    ComplexVariable operator+ (const ComplexVariable& left, const ComplexVariable& right) {
         return ComplexVariable(left.a + right.a , left.b + right.b , left.c + right.c);
+    
     }
 
-    ComplexVariable operator- (const ComplexVariable x, const complex<double> n) {
-        if(!x) {
-            return ComplexVariable(complex(0.0,0.0),complex(1.0,0.0), -n);
-        }
-
+    ComplexVariable operator- (const ComplexVariable& x, const complex<double> n) {
         return ComplexVariable(x.a, x.b , x.c-n);
         
     }
     
-    ComplexVariable operator- (const complex<double> n , const ComplexVariable x) {
-        if(!x) {
-            return ComplexVariable(complex(0.0,0.0),complex(-1.0,0.0), n);
-        }
-
+    ComplexVariable operator- (const complex<double> n , const ComplexVariable& x) {
         return ComplexVariable(-x.a, -x.b , -x.c+n);
         
     }
 
-    ComplexVariable operator- (const ComplexVariable left, const ComplexVariable right) {
-        if((!left) && (!right)) {
-            return ComplexVariable(complex(0.0,0.0) , complex(0.0,0.0) , complex(0.0,0.0));
-        }
-        if(!left) {
-            return ComplexVariable(right.a , right.b - complex(1.0,0.0) , right.c);
-        }
-        if(!right) {
-            return ComplexVariable(left.a , left.b - complex(1.0,0.0) , left.c);
-        }
+    ComplexVariable operator- (const ComplexVariable& left, const ComplexVariable& right) {
         return ComplexVariable(left.a - right.a , left.b - right.b , left.c - right.c);
 
     }
 
-    ComplexVariable operator^ (const ComplexVariable x, const complex<double> n) {
+    // ComplexVariable ComplexVariable::operator-() {
+    //     return (-1 * this);
+    // }
+
+    ComplexVariable operator^ (const ComplexVariable& x, const complex<double> n) {
         if(n.imag() != 0) throw invalid_argument("complex power is not valid");
 
         if(n.real() == 2) {
@@ -249,40 +183,39 @@ namespace solver {
 
     }
 
-    ComplexVariable operator/ (const ComplexVariable x, const complex<double> n) {
-        if(!x) {
-            return ComplexVariable(complex(0.0,0.0),complex(1.0,0.0)/n,complex(0.0,0.0));
-        }
+    ComplexVariable operator/ (const ComplexVariable& x, const complex<double> n) {
+        if(n == complex(0.0,0.0)) throw invalid_argument("Division by zero is not valid");
+
         return ComplexVariable(x.a/n, x.b/n, x.c/n);
 
     }
 
-    ComplexVariable operator== (const ComplexVariable left, const ComplexVariable right) {
+    ComplexVariable operator== (const ComplexVariable& left, const ComplexVariable& right) {
         return left - right;
 
     }
 
-    ComplexVariable operator== (const complex<double> n, const ComplexVariable right) {
+    ComplexVariable operator== (const complex<double> n, const ComplexVariable& right) {
         return right - n;
 
     }
     
-    ComplexVariable operator== (const ComplexVariable left, const complex<double> n) {
+    ComplexVariable operator== (const ComplexVariable& left, const complex<double> n) {
         return left - n;
 
     }
 
-    bool operator! (const ComplexVariable x) {
-        return (x.a.real() == 0.0) && (x.a.imag() == 0.0) && 
-                (x.b.real() == 0.0) && (x.b.imag() == 0.0) &&
-                (x.c.real() == 0.0) && (x.c.imag() == 0.0);
+    bool ComplexVariable::operator! () const {
+        return (this->a.real() == 0.0) && (this->a.imag() == 0.0) && 
+                (this->b.real() == 0.0) && (this->b.imag() == 0.0) &&
+                (this->c.real() == 0.0) && (this->c.imag() == 0.0);
     }
 
-    string operator+ (const ComplexVariable x, const string str) {
+    string operator+ (const ComplexVariable& x, const string str) {
         return "("+ to_string(x.a.real()) + "+" + to_string(x.a.imag())  + "i)*x^2 +" + "("+ to_string(x.b.real()) + "+" + to_string(x.b.imag())  + "i)*x +("+ to_string(x.c.real()) + "+" + to_string(x.c.imag())  + "i)" + str;
     }
     
-    string operator+ (const string str , const ComplexVariable x) {
+    string operator+ (const string str , const ComplexVariable& x) {
         return str + "("+ to_string(x.a.real()) + "+" + to_string(x.a.imag())  + "i)*x^2 +" + "("+ to_string(x.b.real()) + "+" + to_string(x.b.imag())  + "i)*x +("+ to_string(x.c.real()) + "+" + to_string(x.c.imag())  + "i)";
 
     }
@@ -290,10 +223,10 @@ namespace solver {
 
     // https://www.programiz.com/cpp-programming/examples/quadratic-roots
 
-    double solve(const RealVariable equation) {
-        cout << "a: " << equation.geta() << " b: " << equation.getb() << " c: " << equation.getc() << endl;
+    double solve(const RealVariable& equation) {
+        // cout << "a: " << equation.get_a() << " b: " << equation.get_b() << " c: " << equation.get_c() << endl;
 
-        double a = equation.geta(), b = equation.getb(), c = equation.getc();
+        double a = equation.get_a(), b = equation.get_b(), c = equation.get_c();
         
         if(!equation) return 0;
 
@@ -313,9 +246,9 @@ namespace solver {
         throw invalid_argument("This equation does not have roots in real numbers:" + equation);
     }
 
-    complex<double> solve(const ComplexVariable equation) {
+    complex<double> solve(const ComplexVariable& equation) {
 
-        complex<double> a = equation.geta(), b = equation.getb(), c = equation.getc();
+        complex<double> a = equation.get_a(), b = equation.get_b(), c = equation.get_c();
 
         if(!equation) return 0;
 
