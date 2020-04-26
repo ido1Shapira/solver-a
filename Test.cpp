@@ -3,7 +3,7 @@
 #include <complex>
 #include "solver.hpp"
 
-using namespace std;
+using namespace std; 
 using solver::solve, solver::RealVariable, solver::ComplexVariable;
 
 // Id of collaborators 208825539 207950577
