@@ -83,6 +83,19 @@ namespace solver {
 
     }
 
+    RealVariable operator/ (const RealVariable& left, const RealVariable& right) {
+        RealVariable x;
+
+        if(!right) throw invalid_argument("Division by zero is not valid");
+
+        if(!(left - right)) return RealVariable(0,0,1);
+        if(!(left - (x^2)) && !(right - x)) return RealVariable(0,1,0);
+        if(right.a == 0 && right.b == 0) return left/right.c;
+
+        throw invalid_argument("divison is out of our assignment's scope");
+
+    }
+
     RealVariable operator== (const RealVariable& left, const RealVariable& right) {
         return left - right;
 
@@ -163,10 +176,6 @@ namespace solver {
 
     }
 
-    // ComplexVariable ComplexVariable::operator-() {
-    //     return (-1 * this);
-    // }
-
     ComplexVariable operator^ (const ComplexVariable& x, const complex<double> n) {
         if(n.imag() != 0) throw invalid_argument("complex power is not valid");
 
@@ -189,6 +198,19 @@ namespace solver {
         return ComplexVariable(x.a/n, x.b/n, x.c/n);
 
     }
+    
+    ComplexVariable operator/ (const ComplexVariable& left, const ComplexVariable& right) {
+        ComplexVariable x;
+
+        if(!right) throw invalid_argument("Division by zero is not valid");
+
+        if(!(left - right)) return ComplexVariable(0,0,complex(1.0,0.0));
+        if(!(left - (x^2)) && !(right - x)) return ComplexVariable(0,complex(1.0,0.0),0);
+        if(right.a == complex(0.0,0.0) && right.b == complex(0.0,0.0)) return left/right.c;
+
+        throw invalid_argument("divison is out of our assignment's scope");
+    }
+
 
     ComplexVariable operator== (const ComplexVariable& left, const ComplexVariable& right) {
         return left - right;

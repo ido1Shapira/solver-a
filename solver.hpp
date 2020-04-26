@@ -43,6 +43,8 @@ namespace solver {
         friend RealVariable operator^ (const RealVariable& x, const double n);
 
         friend RealVariable operator/ (const RealVariable& x, const double n);
+        friend RealVariable operator/ (const RealVariable& left, const RealVariable& right);
+
 
         friend RealVariable operator== (const RealVariable& left,const RealVariable& right);
         friend RealVariable operator== (const double n,const RealVariable& right);
@@ -89,6 +91,8 @@ namespace solver {
         friend ComplexVariable operator^ (const ComplexVariable& x, const complex<double> n);
 
         friend ComplexVariable operator/ (const ComplexVariable& x, const complex<double> n);
+        friend ComplexVariable operator/ (const ComplexVariable& left, const ComplexVariable& right);
+        
 
         friend ComplexVariable operator== (const ComplexVariable& left,const ComplexVariable& right);
         friend ComplexVariable operator== (const complex<double> n,const ComplexVariable& right);
