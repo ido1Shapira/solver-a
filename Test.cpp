@@ -3,7 +3,7 @@
 #include <complex>
 #include "solver.hpp"
 
-using namespace std; 
+using namespace std;
 using solver::solve, solver::RealVariable, solver::ComplexVariable;
 
 // Id of collaborators 208825539 207950577
@@ -134,13 +134,13 @@ TEST_CASE("polinomial complex equation"){
     CHECK((solve((z^2) +9 == 0) == complex(0.0,3.0) || solve((z^2) +9 == 0) == complex(0.0,-3.0)));
     CHECK((solve((z^2) +4*z +7 == 0) == complex(-2.0,-sqrt(3)) || solve((z^2) +4*z +7 == 0) == complex(-2.0,sqrt(3))));
     CHECK((solve(5*(z^2) +6*z +3 == 0) == complex(-0.6,sqrt(6)/5) || solve(5*(z^2) +6*z +3 == 0) == complex(-0.6,-sqrt(6)/5)));
-  //  CHECK((solve(2*(z^2) +12*z +9 == 0) == complex(-1.5*(sqrt(2)+2),0.0)));// || solve(2*(z^2) +12*z +9  == 0) == complex(-1.5*(sqrt(2)+2),0.0)));
     CHECK((solve(0*(z^2) +3*z +27 == 0) == complex(-9.0,0.0) ));
     CHECK((solve((z^2)/2 +z +14 == 0) == complex(-1.0,3*sqrt(3)) || solve((z^2)/2 +z +14 == 0) == complex(-1.0,-3*sqrt(3))));
     CHECK((solve((z^2)*8 +56*z +16 == 0) == complex(-(7+sqrt(41))/2,0.0) || solve((z^2)*8 +56*z +16 == 0) == complex((-7+sqrt(41))/2,0.0)));
     CHECK((solve(2*(z^2) +4*z +9== 8+2/2) == complex(0.0,0.0) || solve((z^2) +2*z +1== 1) == complex(-2.0,0.0)));
     CHECK((solve(6*(z^2)/2 +2*z*3 +90== 90) == complex(0.0,0.0) || solve((z^2) +2*z +1== 1) == complex(-2.0,0.0)));
     CHECK((solve((z^2)*2-(z^2) +2*z*8- 14*z +1== 1) == complex(0.0,0.0) || solve((z^2) +2*z +1== 1) == complex(-2.0,0.0)));
+
 }
 TEST_CASE("edge-cases checks throws for complex numbers"){
     ComplexVariable w;

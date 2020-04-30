@@ -64,10 +64,10 @@ namespace solver {
 
     RealVariable operator^ (const RealVariable& x, const double n) {
         if(n == 2) {
-            return RealVariable(1,0,0);
+            return x*x;
         }
         if (n == 1) {
-            return RealVariable(0,1,0);
+            return x;
         }
         if (n == 0) {
             return RealVariable(0,0,1);
@@ -180,10 +180,10 @@ namespace solver {
         if(n.imag() != 0) throw invalid_argument("complex power is not valid");
 
         if(n.real() == 2) {
-            return ComplexVariable(complex(1.0,0.0),complex(0.0,0.0),complex(0.0,0.0));
+            return x*x;
         }
         if (n.real() == 1) {
-            return ComplexVariable(complex(0.0,0.0),complex(1.0,0.0),complex(0.0,0.0));
+            return x;
         }
         if (n.real() == 0) {
             return ComplexVariable(complex(0.0,0.0),complex(0.0,0.0),complex(1.0,0.0));
